@@ -1,30 +1,39 @@
-import React from 'react';
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
-import './App.css';
+const Logo = () => {
+	return <h1>Logo </h1>;
+};
 
-function App() {
-	const [count, setCount] = useState(0);
-	// JSX
-	console.log(<h1>Hello World</h1>);
-	// Crated with Native JS
-	console.log(document.createElement('h1'));
+const NavItem = () => {
+	return <li>Home</li>;
+};
 
-	// Building a UI using React.createElement() method
-	const section = React.createElement(
-		'section',
-		null,
-		React.createElement(
-			'h1',
-			{
-				id: 'h1',
-				className: 'h1-class',
-			},
-			'Hello React'
-		)
+const Nav = () => {
+	return (
+		<nav>
+			<ul>
+				<NavItem />
+				<NavItem />
+				<NavItem />
+			</ul>
+		</nav>
 	);
-	return section;
-}
+};
 
-export default App;
+const Header = () => {
+	return (
+		<header
+			style={{
+				width: '100vw',
+				height: '100px',
+				display: 'flex',
+				alignItems: 'center',
+				justifyContent: 'space-between',
+			}}>
+			<Logo />
+			<Nav />
+		</header>
+	);
+};
+
+const App = () => {
+	return <Header />;
+};
