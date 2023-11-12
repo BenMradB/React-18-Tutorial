@@ -16,6 +16,7 @@ const App = () => {
 
 	return (
 		<>
+			git
 			<Header />
 			<p> {counter} </p>
 			<button onClick={() => setCounter(counter + 1)}>Increment</button>
