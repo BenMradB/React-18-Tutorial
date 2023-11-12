@@ -8,17 +8,25 @@
 	JS native vs React useState
 	Ternary Operation
 */
-import React from 'react';
+import { useState } from 'react';
 import Header from './components/Header';
 
 const App = () => {
-	const [counter, setCounter] = React.useState(0);
+	const [counter, setCounter] = useState(0);
+	const [isEnabled, setIsEnabled] = useState(false);
+	// If state value depends on the current state value
+	// setCounter((curr) => curr + 1)
+	// If not
+	// setCounter()
 
 	return (
 		<>
 			<Header />
 			<p> {counter} </p>
-			<button onClick={() => setCounter(counter + 1)}>Increment</button>
+			<button onClick={() => setCounter((curr) => curr + 1)}>
+				Increment
+			</button>
+			<button onClick={() => setIsEnabled(true)}>Enable</button>
 		</>
 	);
 };
