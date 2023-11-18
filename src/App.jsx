@@ -4,6 +4,7 @@ import Header from './components/Header';
 import IconsList from './components/IconsList';
 
 const App = () => {
+	const [state, setState] = useState('');
 	const [imagesCounter, setImagesCounter] = useState(0);
 	const [showList, setShowList] = useState(true);
 	const onIncreaseImagesCounter = () => {
@@ -15,6 +16,13 @@ const App = () => {
 
 	return (
 		<>
+			<button onClick={() => alert('Clicked')}>Click</button>
+			<input
+				type='text'
+				value={state}
+				onChange={(e) => setState(e.target.value)}
+				onBlur={() => console.log('Blur')}
+			/>
 			<Header
 				imagesCounter={imagesCounter}
 				onIncreaseImagesCounter={onIncreaseImagesCounter}
