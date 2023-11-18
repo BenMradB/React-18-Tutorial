@@ -1,21 +1,14 @@
-import { useState } from 'react';
-import Logo from './Logo';
-import Nav from './Nav';
+import Button from './Button';
 
-const Header = () => {
+const Header = ({ imagesCounter, onIncreaseImagesCounter, onToggleList }) => {
 	return (
-		<header
-			style={{
-				width: 'calc(100% - 40px)',
-				height: '100px',
-				display: 'flex',
-				alignItems: 'center',
-				justifyContent: 'space-between',
-				padding: '20px',
-			}}>
-			<Logo />
-			<Nav />
-		</header>
+		<div className='buttons'>
+			<Button onClickHandler={onIncreaseImagesCounter}>
+				+ Increase React Images In The list{' '}
+			</Button>
+			<p>{imagesCounter} Images In the List</p>
+			<Button onClickHandler={onToggleList}>Toggle List</Button>
+		</div>
 	);
 };
 
