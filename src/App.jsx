@@ -1,36 +1,40 @@
-import { useState } from 'react';
 import './App.css';
 import Header from './components/Header';
-import IconsList from './components/IconsList';
+import Cat from './components/Cat';
+import Axios from 'axios';
+import { useEffect, useState } from 'react';
+const CATS_BASE_URL = `https://api.thecatapi.com/v1/images/search`;
 
 const App = () => {
-	const [state, setState] = useState('');
-	const [imagesCounter, setImagesCounter] = useState(0);
-	const [showList, setShowList] = useState(true);
-	const onIncreaseImagesCounter = () => {
-		setImagesCounter((curr) => curr + 1);
+	const [selectedCat, setSelectedCat] = useState('');
+	const [fetchedCat, setFetchedCat] = useState(null);
+
+	const onSelectedCatHandler = (e) => {
+		setSelectedCat(e.target.value);
 	};
-	const onToggleList = () => {
-		setShowList((curr) => !curr);
-	};
+
+	useEffect(() => {
+		const fetchCats = async () => {
+			const { data } = await Axios.get(
+				`${CATS_BASE_URL}?breed_ids=${selectedCat}`
+			);
+			setFetchedCat(data[0]);
+		};
+
+		selectedCat && fetchCats();
+	}, [selectedCat]);
+
+	useEffect(() => {
+		document.querySelector('title').textContent = `Cat | ${selectedCat}`;
+	}, [selectedCat]);
 
 	return (
 		<>
-			<button onClick={() => alert('Clicked')}>Click</button>
-			<input
-				type='text'
-				value={state}
-				onChange={(e) => setState(e.target.value)}
-				onBlur={() => console.log('Blur')}
-			/>
 			<Header
-				imagesCounter={imagesCounter}
-				onIncreaseImagesCounter={onIncreaseImagesCounter}
-				onToggleList={onToggleList}
+				selectedCat={selectedCat}
+				setSelectedCat={onSelectedCatHandler}
 			/>
-			{showList && imagesCounter > 0 && (
-				<IconsList imagesCounter={imagesCounter} />
-			)}
+			{fetchedCat && <Cat cat={fetchedCat} />}
 		</>
 	);
 };
