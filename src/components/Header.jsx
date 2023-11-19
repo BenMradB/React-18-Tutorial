@@ -1,13 +1,20 @@
-import Button from './Button';
+import { cats } from '../data/cats';
 
-const Header = ({ imagesCounter, onIncreaseImagesCounter, onToggleList }) => {
+const Header = ({ selectedCat, setSelectedCat }) => {
 	return (
 		<div className='buttons'>
-			<Button onClickHandler={onIncreaseImagesCounter}>
-				+ Increase React Images In The list{' '}
-			</Button>
-			<p>{imagesCounter} Images In the List</p>
-			<Button onClickHandler={onToggleList}>Toggle List</Button>
+			<select
+				type='text'
+				className='cats'
+				value={selectedCat}
+				onChange={(e) => setSelectedCat(e)}>
+				<option value=''> Select Cat </option>
+				{cats.map((cat, index) => (
+					<option key={index} value={cat.value}>
+						{cat.name}
+					</option>
+				))}
+			</select>
 		</div>
 	);
 };
