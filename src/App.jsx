@@ -8,6 +8,7 @@ const CATS_BASE_URL = `https://api.thecatapi.com/v1/images/search`;
 const App = () => {
 	const [selectedCat, setSelectedCat] = useState('');
 	const [fetchedCat, setFetchedCat] = useState(null);
+	const [display, setDisplay] = useState(true);
 
 	const onSelectedCatHandler = (e) => {
 		setSelectedCat(e.target.value);
@@ -24,16 +25,22 @@ const App = () => {
 		selectedCat && fetchCats();
 	}, [selectedCat]);
 
-	useEffect(() => {
-		document.querySelector('title').textContent = `Cat | ${selectedCat}`;
-	}, [selectedCat]);
+	// useEffect(() => {
+	// 	console.log(selectedCat);
+	// 	console.log('useEffect Runs');
+	// });
 
 	return (
 		<>
-			<Header
-				selectedCat={selectedCat}
-				setSelectedCat={onSelectedCatHandler}
-			/>
+			<button onClick={() => setDisplay((curr) => !curr)}>
+				Hide select{' '}
+			</button>
+			{display && (
+				<Header
+					selectedCat={selectedCat}
+					setSelectedCat={onSelectedCatHandler}
+				/>
+			)}
 			{fetchedCat && <Cat cat={fetchedCat} />}
 		</>
 	);
