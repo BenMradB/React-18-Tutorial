@@ -1,4 +1,7 @@
-const Question = ({ question, answer, dispatch }) => {
+import { useGame } from '../contexts/GameProvider';
+
+const Question = ({ question }) => {
+	const { answer, dispatch } = useGame();
 	return (
 		<div className='flex flex-col gap-4 font-normal'>
 			<h2 className='text-[25px] font-semibold h-[40]'>

@@ -1,13 +1,13 @@
 import React from 'react';
 import { Button } from '../components';
 import Loader from '../components/Loader';
+import { useGame } from '../contexts/GameProvider';
 
-const InitialScreen = ({
-	playerName,
-	onChange,
-	isLoading,
-	onFetchQuestionsHandler,
-}) => {
+// onChange={handleOnChangePlayerName}
+// 					isLoading={isLoading}
+// 					onFetchQuestionsHandler={onFetchQuestionsHandler}
+const InitialScreen = ({ onChange, isLoading, onFetchQuestionsHandler }) => {
+	const { playerName } = useGame();
 	return (
 		<div className='w-full h-full flex flex-col items-center justify-start gap-10 uppercase font-bold'>
 			<h1 className='text-[4rem]'>Welcome to the react quiz app</h1>

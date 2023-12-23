@@ -1,16 +1,12 @@
 import Question from './Question';
 import Button from './Button';
 import ProgressBar from './ProgressBar';
-import { useState } from 'react';
+import { useGame } from '../contexts/GameProvider';
 
-const Questions = ({
-	questions,
-	dispatch,
-	answer,
-	totalScore,
-	score,
-	questionIndex,
-}) => {
+const Questions = () => {
+	const { dispatch, questions, questionIndex, answer } = useGame();
+	console.log(questions);
+	console.log(questionIndex);
 	const nextQuestionHandler = () => {
 		dispatch({
 			type: 'game/next/question',
@@ -18,17 +14,9 @@ const Questions = ({
 	};
 	return (
 		<div className='w-1/2 p-2 flex flex-col gap-4'>
-			<ProgressBar
-				questionNumber={questionIndex}
-				totalScore={totalScore}
-				questions={questions}
-				score={score}
-			/>
-			<Question
-				question={questions[questionIndex]}
-				answer={answer}
-				dispatch={dispatch}
-			/>
+			<ProgressBar />
+
+			<Question question={questions[questionIndex]} />
 			{answer !== null ? (
 				questionIndex < questions.length - 1 ? (
 					<Button onClick={nextQuestionHandler}>Next</Button>

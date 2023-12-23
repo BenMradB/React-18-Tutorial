@@ -1,19 +1,14 @@
 import React from 'react';
 import { Button } from '../components';
+import { useGame } from '../contexts/GameProvider';
 
-const FinishScreen = ({
-	playerName,
-	dispatch,
-	questions,
-	totalScore,
-	score,
-}) => {
+const FinishScreen = () => {
+	const { dispatch, playerName, score, questions } = useGame();
+	const totalScore = questions.reduce(
+		(acc, question) => acc + question.points,
+		0
+	);
 	const onReplayHandler = () => {
-		// setGameState('INITIAL');
-		// setQuestions([]);
-		// setAnswer(null);
-		// setPlayerName('');
-		// setScore(0);
 		dispatch({ type: 'game/reset' });
 	};
 	return (
